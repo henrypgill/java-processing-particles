@@ -20,6 +20,8 @@ public class Spark {
      */
     private PVector vel;
     private int myColour; //there's no real color type, it's just stored as an int
+
+    private String shape;
     private final PApplet p5;
 
     /**
@@ -32,6 +34,8 @@ public class Spark {
         this.vel = PVector.random2D().mult(p5.random(0.1f, 2));
         this.size = size;
         this.myColour = colour;
+        String[] shapeArray = {"square", "circle"};
+        this.shape = Utils.pickFromArrayOfStrings(shapeArray);
     }
 
     public void display() {
@@ -41,14 +45,23 @@ public class Spark {
             p5.stroke(0, 100);
         }
         p5.fill(myColour);
-        p5.circle(pos.x, pos.y, size);
+        if (this.shape.equals("square")){
+            p5.square(pos.x, pos.y, size);
+        } else {
+            p5.circle(pos.x, pos.y, size);
+        }
     }
 
     public void update() {
         pos.add(vel);
         final float angleChange = p5.random(-0.2f, 0.2f);
         vel.rotate(angleChange); //steer left or right.
-        size = PApplet.constrain(size + p5.random(-1, 1), 5, 100);
+        if (size == 1) {
+            size = 50;
+        } else {
+            size = PApplet.constrain(size - p5.random(1, 5), 1, 50);
+        }
+
     }
 
 

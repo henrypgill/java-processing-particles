@@ -6,5 +6,10 @@ public class Utils {
         return myArray[(int) (Math.random() * myArray.length)];
     }
 
+    public static String pickFromArrayOfStrings(String[] myArray) {
+        return myArray[(int) (Math.random() * myArray.length)];
+    }
+
+
 }
 
